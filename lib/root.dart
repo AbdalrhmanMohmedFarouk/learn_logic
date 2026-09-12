@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_logic/screens/multi_image_selection.dart';
-import 'package:simple_logic/screens/multi_selection.dart';
+import 'package:simple_logic/screens/single_selection.dart';
 import 'package:simple_logic/screens/toggle_selection.dart';
 
 class Root extends StatefulWidget {
@@ -13,7 +13,7 @@ class Root extends StatefulWidget {
 class _RootState extends State<Root> {
   final PageController controller = PageController();
   final List<Widget> _screens = [
-    MultiSelection(),
+    SingleSelection(),
     MultiImageSelection(),
     ToggleSelection(),
   ];
