@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:simple_logic/screens/multi_image_selection.dart';
-import 'package:simple_logic/screens/single_selection.dart';
-import 'package:simple_logic/screens/toggle_selection.dart';
+import 'package:simple_logic/screens/first/multi_image_selection.dart';
+import 'package:simple_logic/screens/first/single_selection.dart';
+import 'package:simple_logic/screens/first/image_selection.dart';
+import 'package:simple_logic/screens/second/uplode_image.dart';
+
+import 'screens/second/uplode_multi_images.dart';
 
 class Root extends StatefulWidget {
   const Root({super.key});
@@ -15,21 +18,23 @@ class _RootState extends State<Root> {
   final List<Widget> _screens = [
     SingleSelection(),
     MultiImageSelection(),
-    ToggleSelection(),
+    ImageSelection(),
+    UplodeImage(),
+    UplodeMultiImages(),
   ];
-  int selectedIndex=0;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: controller,
-        children:_screens,
+        children: _screens,
         onPageChanged: (v) {
           setState(() {
             selectedIndex = v;
-
           });
         },
       ),
@@ -40,35 +45,36 @@ class _RootState extends State<Root> {
           children: [
             //back
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 setState(() {
-                  controller.jumpToPage(selectedIndex-1);
+                  controller.jumpToPage(selectedIndex - 1);
                 });
               },
               child: Container(
                 // width: 200,
                 height: 50,
                 decoration: BoxDecoration(
-                    border:Border.all(color: Colors.black) ,
-                    color: Colors.white),
+                  border: Border.all(color: Colors.black),
+                  color: Colors.white,
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric( horizontal: 17.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
                   child: Row(
                     mainAxisAlignment: .center,
                     children: [
-                      SizedBox(width: 5,),
-                      Icon(Icons.arrow_back,color: Colors.black,),
+                      SizedBox(width: 5),
+                      Icon(Icons.arrow_back, color: Colors.black),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(width: 10,),
+            SizedBox(width: 10),
             //forward
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 setState(() {
-                 controller.jumpToPage(selectedIndex+1) ;
+                  controller.jumpToPage(selectedIndex + 1);
                 });
               },
               child: Container(
@@ -84,8 +90,8 @@ class _RootState extends State<Root> {
                         "Go to Next Page",
                         style: TextStyle(color: Colors.white),
                       ),
-                      SizedBox(width: 5,),
-                      Icon(Icons.arrow_forward,color: Colors.white,),
+                      SizedBox(width: 5),
+                      Icon(Icons.arrow_forward, color: Colors.white),
                     ],
                   ),
                 ),
